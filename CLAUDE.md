@@ -124,7 +124,19 @@ training knowledge. This ensures accuracy for the specific version.
   (polling is for development only)
 
 ## GitHub Repository
-<!-- Fill in after gh repo create -->
+- Repository: https://github.com/TheRadMod/experiment-telegram-bot-api
+- Visibility: public
+
+## Learnings
+<!-- As we build scripts and explore the technology, record key learnings here.
+This section is a living document — update it after each script with:
+- Gotchas, surprises, or non-obvious behavior discovered
+- Patterns that worked well (or didn't)
+- API quirks, version-specific behavior, or undocumented findings
+- Performance observations or limits encountered
+- Useful tips for future use in larger projects
+
+Format: group by script or topic, keep entries concise. -->
 
 ## Status
 - Created: 2026-03-26
