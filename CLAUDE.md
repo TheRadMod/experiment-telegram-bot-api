@@ -1,71 +1,130 @@
 # Telegram Bot Api - Experimental Project
 
 ## Overview
-<!-- Fill in: What technology is being explored and why -->
+This experiment explores the Telegram Bot API using the `python-telegram-bot`
+library (v22.7). The goal is to learn all capabilities of the Bot API —
+from basic messaging to payments, inline mode, and group management — to
+become an expert for later use in larger projects.
 
 ## Technology Version
-<!-- Fill in after fetching docs. Example:
-- Technology: Redis
-- Version: 7.2.4
-- Python client version: redis-py 5.0.1 (if applicable)
-- Version check date: 2026-03-25
+- Technology: Telegram Bot API
+- Version: 9.5 (March 1, 2026)
+- Python client version: python-telegram-bot 22.7
+- Python requirement: 3.10+
+- Version check date: 2026-03-26
 - Note: Future sessions should check if a newer version is available
   and decide whether to use this version or upgrade.
--->
 
 ## Documentation Sources
-<!-- Fill in: Where official docs were fetched from.
 IMPORTANT: All scripts in this experiment MUST be based on the
 fetched documentation stored in the docs/ folder, NOT on general
 training knowledge. This ensures accuracy for the specific version.
 
-- Official docs URL: <!-- e.g., https://redis.io/docs/ -->
-- API reference URL: <!-- if applicable -->
-- docs/ folder contents: <!-- list what was downloaded -->
--->
+- Official Bot API docs: https://core.telegram.org/bots/api
+- Bot API changelog: https://core.telegram.org/bots/api-changelog
+- python-telegram-bot GitHub: https://github.com/python-telegram-bot/python-telegram-bot
+- python-telegram-bot docs: https://docs.python-telegram-bot.org/
+- First Bot tutorial: https://github.com/python-telegram-bot/python-telegram-bot/wiki/Extensions---Your-first-Bot
+- docs/ folder contents:
+  - telegram-bot-api-reference.md (full API reference, all methods and types)
+  - python-telegram-bot-library.md (library architecture, handlers, patterns)
+  - api-changelog.md (recent API versions 9.1-9.5)
 
 ## Key Concepts
-<!-- Fill in: Core concepts this experiment aims to demonstrate -->
+1. Bot lifecycle — token creation, polling vs webhooks, Application architecture
+2. Handlers and filters — routing updates to callbacks based on type and content
+3. Keyboards and inline buttons — interactive UI within Telegram chats
+4. Conversation flows — multi-step stateful interactions using ConversationHandler
+5. Media handling — sending/receiving photos, documents, audio, video
+6. Inline mode — using the bot from any chat via @mention
+7. Group/channel management — permissions, moderation, forum topics
+8. Payments — invoices, shipping, pre-checkout, Telegram Stars
+9. Persistence and scheduling — storing state, job queue for timed tasks
+10. Error handling and best practices — logging, rate limiting, graceful shutdown
 
 ## Capabilities to Explore
-<!-- Fill in: Numbered list of specific capabilities/aspects to build scripts for -->
-<!-- Example:
-1. Basic connection and setup
-2. Core operation X
-3. Core operation Y
-4. Advanced pattern Z
--->
+1. Bot setup and echo bot (hello world)
+2. Commands and message handlers
+3. Inline keyboards and callback queries
+4. Sending media (photos, documents, audio, video)
+5. Receiving and downloading media
+6. Conversation handlers (multi-step flows)
+7. Bot commands menu and descriptions
+8. Inline mode (use bot from any chat)
+9. Group and channel management
+10. Webhooks (vs polling)
+11. Payments API
+12. Custom filters and middleware
+13. Error handling and persistence
+14. Rate limiting and best practices
 
 ## Script Conventions
-<!-- Fill in after discussing with user. Options to decide:
-- Language: Python / Shell / Mixed
+- Language: Python
 - Naming: NN_descriptive_name.py (numbered for progression)
-- Each script: Self-contained, runnable independently
-- Logging: print statements / logging module / none
-- Output: Terminal output / file output / both
-- run_all script: Yes / No
--->
+- Each script: Self-contained, runnable independently with `uv run NN_name.py`
+- Logging: `print` for user-facing output + `logging` module with file handler
+  for detailed logs (saved to `logs/` directory)
+- Output: Both terminal and file output. Terminal for immediate feedback,
+  files for artifacts (downloaded media, logs, data)
+- run_all script: Yes — `run_all.py` with interactive selection menu
+  to choose which script to run
+- Docstring: Each script starts with a docstring explaining the concept
+- Main guard: All scripts use `if __name__ == "__main__"`
+- Bot token: Loaded from environment variable `TELEGRAM_BOT_TOKEN`
+  or from a `.env` file (using python-dotenv)
 
 ## Progression Plan
-<!-- Fill in: Ordered plan for building scripts from basic to advanced -->
-<!-- Example:
-1. 01_basic_connection.py - Establish connection, verify setup works
-2. 02_simple_operation.py - Perform the simplest useful operation
-3. 03_intermediate_pattern.py - Combine operations into a pattern
-4. 04_advanced_usage.py - Production-like usage with error handling
--->
+1. `01_echo_bot.py` - Create bot, handle /start, echo messages back
+2. `02_commands_and_handlers.py` - Multiple commands, message filters, argument parsing
+3. `03_inline_keyboards.py` - Inline keyboard buttons, callback queries, button updates
+4. `04_send_media.py` - Send photos, documents, audio, video, media groups
+5. `05_receive_media.py` - Receive and download user-sent media files
+6. `06_conversation_handler.py` - Multi-step conversation with states and fallbacks
+7. `07_bot_commands_menu.py` - Set bot commands, descriptions, menu button
+8. `08_inline_mode.py` - Inline queries, results, chosen inline results
+9. `09_group_management.py` - Permissions, banning, promoting, forum topics
+10. `10_webhooks.py` - Set up webhook-based update receiving
+11. `11_payments.py` - Create invoices, handle shipping/checkout queries
+12. `12_custom_filters.py` - Build custom filter classes, middleware patterns
+13. `13_error_handling_persistence.py` - Error handlers, PicklePersistence, user/chat data
+14. `14_rate_limiting_best_practices.py` - Rate limiter, job queue, graceful shutdown
 
 ## Prerequisites
-<!-- Fill in: What needs to be installed/configured before running scripts -->
+- Python 3.10+
+- Telegram account (to interact with the bot)
+- Bot token from @BotFather:
+  1. Open Telegram, search for @BotFather
+  2. Send `/newbot`
+  3. Choose a name (display name) and username (must end in `bot`)
+  4. BotFather returns the token — save it
+- Environment setup:
+  ```bash
+  # Create .env file in experiment directory
+  echo "TELEGRAM_BOT_TOKEN=your_token_here" > .env
+  ```
+- Python packages:
+  ```bash
+  uv add python-telegram-bot[all] python-dotenv
+  ```
+  The `[all]` extra installs: job-queue, webhooks, rate-limiter,
+  callback-data, socks, http2, passport support.
 
 ## Integration Notes
-<!-- Fill in: How these modular scripts could plug into larger projects -->
+- The echo bot pattern (script 01) is the foundation for any Telegram bot project
+- Command and handler patterns (scripts 02-03) form the routing layer
+  for any bot application
+- Conversation handlers (script 06) can be extracted for multi-step
+  user onboarding, form filling, or wizard-style interfaces
+- Media handling (scripts 04-05) enables file processing pipelines
+  (e.g., image processing bots, document conversion)
+- Group management (script 09) enables moderation bots and community tools
+- Payments (script 11) enables e-commerce and subscription-based bots
+- Persistence (script 13) is essential for any stateful bot in production
+- Webhook setup (script 10) is the production deployment pattern
+  (polling is for development only)
 
 ## GitHub Repository
-<!-- Fill in after gh repo create. Example:
-- Repository: https://github.com/username/experiment-name
-- Visibility: public / private
--->
+<!-- Fill in after gh repo create -->
 
 ## Status
 - Created: 2026-03-26
