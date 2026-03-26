@@ -138,6 +138,15 @@ This section is a living document — update it after each script with:
 
 Format: group by script or topic, keep entries concise. -->
 
+### 01_echo_bot
+- `ApplicationBuilder().token(token).build()` + `run_polling()` is the minimal
+  boilerplate to get a bot running
+- `filters.TEXT & ~filters.COMMAND` is the idiomatic way to catch plain text only
+- `update.message.reply_text()` is a convenience shortcut that auto-targets
+  the correct chat — prefer it over `context.bot.send_message(chat_id=...)`
+- Handler registration order matters — first match wins
+- `run_polling()` blocks the main thread until Ctrl+C
+
 ## Status
 - Created: 2026-03-26
 - Status: Learning
