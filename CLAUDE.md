@@ -157,6 +157,19 @@ Format: group by script or topic, keep entries concise. -->
 - `update.effective_user` and `update.effective_chat` are convenience accessors
   that work across all update types (messages, callbacks, etc.)
 
+### 03_inline_keyboards
+- `callback_query.answer()` MUST be called on every button press, otherwise
+  Telegram shows a loading spinner for up to 30 seconds
+- `callback_query.edit_message_text()` replaces message content + keyboard in-place
+- Keyboard layout: each inner list = one row of buttons. Two buttons in the
+  same list = side by side. Separate lists = stacked vertically.
+- `callback_data` is limited to 64 bytes — use short prefixes for routing
+- `context.user_data` is a per-user dict that persists for the bot's lifetime
+  (in memory only, lost on restart — use Persistence for durability)
+- Toggle pattern: flip state in user_data, re-render keyboard with new labels
+- One `CallbackQueryHandler` can handle all buttons — route inside the callback
+  by inspecting `query.data`
+
 ## Status
 - Created: 2026-03-26
 - Status: Learning
