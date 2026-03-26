@@ -147,6 +147,16 @@ Format: group by script or topic, keep entries concise. -->
 - Handler registration order matters — first match wins
 - `run_polling()` blocks the main thread until Ctrl+C
 
+### 02_commands_and_handlers
+- `context.args` splits everything after the command into a list of strings
+  (e.g., `/caps hello world` -> `["hello", "world"]`)
+- `update.message.photo` is a list of PhotoSize objects (different resolutions),
+  `[-1]` gives the largest — Telegram always sends multiple sizes
+- `filters.Sticker.ALL` catches all sticker types (static, animated, video)
+- Unknown command handler must be registered last — first match wins
+- `update.effective_user` and `update.effective_chat` are convenience accessors
+  that work across all update types (messages, callbacks, etc.)
+
 ## Status
 - Created: 2026-03-26
 - Status: Learning
